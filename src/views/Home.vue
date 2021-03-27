@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <Navbar @switchComponent="toggleComponent" />
+  <component :is="currentComponent" />
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Navbar from "../components/Navbar";
+import Login from "../components/Login";
+import Signup from "../components/Signup";
+import { ref } from "@vue/runtime-core";
 
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
-  }
-}
+    Navbar,
+    Login,
+    Signup,
+  },
+  props: ["component"],
+  setup() {
+    const currentComponent = ref("Login");
+
+    const toggleComponent = (event) => {
+      currentComponent.value = event;
+    };
+
+    return { toggleComponent, currentComponent };
+  },
+};
 </script>
