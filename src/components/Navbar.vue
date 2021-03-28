@@ -12,14 +12,31 @@
         >Online Admin Supporter</span
       >
     </div>
-    <div class="flex items-center flex-no-shrink justify-between">
-      <button @click="handleLogin" class="btn mr-2">
-        Log in
-      </button>
-      <button @click="handleSignup" class="btn">
-        Sign up
-      </button>
-    </div>
+    <ol
+      class="flex leading-none items-center flex-no-shrink justify-between divide-x-2 divide-blue-400"
+    >
+      <li class="pr-2">
+        <a class="link">Schedule</a>
+      </li>
+      <li class="px-2">
+        <a class="link">Add Admin</a>
+      </li>
+      <li class="px-2">
+        <a class="link">Create Supporter</a>
+      </li>
+      <li class="px-2">
+        <a class="link">Log in</a>
+      </li>
+      <li class="px-2">
+        <a class="link">Sign up</a>
+      </li>
+      <li class="px-2">
+        <a class="link">Add Student</a>
+      </li>
+      <li class="pl-2">
+        <a class="link">Log out</a>
+      </li>
+    </ol>
   </nav>
 </template>
 
