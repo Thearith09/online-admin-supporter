@@ -4,48 +4,79 @@
   >
     <div class="flex items-center flex-no-shrink text-blue-700 uppercase mr-6">
       <img
-        class="w-16 mr-2"
-        src="/images/masterit-logo.png"
+        @click="handleTable"
+        class="w-16 mr-2 cursor-pointer"
+        src="/images/masterit-logo1.png"
         alt="masterit logo"
       />
-      <span class="font-semibold text-xl tracking-tight"
+      <span class="font-semibold text-xl tracking-tight mt-7"
         >Online Admin Supporter</span
       >
     </div>
     <ol
-      class="flex leading-none items-center flex-no-shrink justify-between divide-x-2 divide-blue-400"
+      class="flex leading-none items-center flex-no-shrink justify-between divide-x-2 divide-white"
     >
-      <li class="pr-2">
-        <a class="link">Schedule</a>
-      </li>
-      <li class="px-2">
-        <a class="link">Add Admin</a>
-      </li>
-      <li class="px-2">
-        <a class="link">Create Supporter</a>
-      </li>
-      <li class="px-2">
-        <a class="link">Log in</a>
-      </li>
-      <li class="px-2">
-        <a class="link">Sign up</a>
-      </li>
-      <li class="px-2">
-        <a class="link">Add Student</a>
-      </li>
-      <li class="pl-2">
-        <a class="link">Log out</a>
-      </li>
+      <template v-if="user">
+        <li class="pr-2">
+          <a
+            class="link"
+            :class="[component == 'Schedule' ? 'active-nav' : '']"
+            @click="handleSchedule"
+          >
+            Schedule</a
+          >
+        </li>
+        <li class="px-2">
+          <a
+            class="link"
+            :class="[component == 'NewAdmin' ? 'active-nav' : '']"
+            @click="handleAddAdmin"
+            >Add Admin</a
+          >
+        </li>
+        <li class="px-2">
+          <a
+            class="link"
+            :class="[component == 'NewSupporter' ? 'active-nav' : '']"
+            @click="handleAddSupporter"
+            >Create Supporter</a
+          >
+        </li>
+        <li class="px-2">
+          <a
+            class="link"
+            :class="[component == 'NewStudent' ? 'active-nav' : '']"
+            @click="handleAddStudent"
+            >Add Student</a
+          >
+        </li>
+        <li class="pl-2">
+          <a class="link" @click="handleLogout">Log out</a>
+        </li>
+      </template>
     </ol>
   </nav>
 </template>
 
 <script>
 import { ref } from "@vue/reactivity";
+import { projectAuth } from "../firebase/config";
+import getUser from "../composables/getUser";
+import { useRouter } from "vue-router";
+import { computed, watch } from "@vue/runtime-core";
 
 export default {
+  props: ["watchComponent"],
   setup(props, { emit }) {
-    const component = ref("Signup");
+    const component = ref(null);
+    const { user } = getUser();
+    const router = useRouter();
+
+    //reset active anchor tag in navbar
+    const watchComponent = computed(() => props.watchComponent);
+    watch(watchComponent, () => {
+      component.value = watchComponent.value;
+    });
 
     const handleLogin = () => {
       component.value = "Login";
@@ -56,7 +87,49 @@ export default {
       component.value = "Signup";
       emit("switchComponent", component.value);
     };
-    return { handleLogin, handleSignup };
+
+    const handleAddAdmin = () => {
+      component.value = "NewAdmin";
+      emit("switchComponent", component.value);
+    };
+
+    const handleLogout = async () => {
+      await projectAuth.signOut();
+      router.push({ name: "Home" });
+    };
+
+    const handleAddStudent = () => {
+      component.value = "NewStudent";
+      emit("switchComponent", component.value);
+    };
+
+    const handleAddSupporter = () => {
+      component.value = "NewSupporter";
+      emit("switchComponent", component.value);
+    };
+
+    const handleSchedule = () => {
+      component.value = "Schedule";
+      emit("switchComponent", component.value);
+    };
+
+    const handleTable = () => {
+      component.value = "Table";
+      emit("switchComponent", component.value);
+    };
+
+    return {
+      user,
+      component,
+      handleLogin,
+      handleSignup,
+      handleLogout,
+      handleAddAdmin,
+      handleAddStudent,
+      handleAddSupporter,
+      handleSchedule,
+      handleTable,
+    };
   },
 };
 </script>

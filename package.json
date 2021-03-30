@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@jinsung.lim/tailwindcss-filters": "^0.1.1",
     "core-js": "^3.6.5",
     "firebase": "^8.3.1",
     "vue": "^3.0.0",

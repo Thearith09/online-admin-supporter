@@ -13,12 +13,19 @@ module.exports = {
       'contain': 'contain',
       '50%': '50%',
       '16': '4rem',
-    }
+    },
   },
   variants: {
     extend: {
       backgroundImage: ['hover', 'focus'],
+      visibility: ['hover', 'focus'],
+      transitionDuration: ['hover', 'focus'],
+      animation: ['hover', 'focus'],
+      rotate: ['active', 'group-hover'],
     },
   },
-  plugins: [],
+  plugins: [
+    /*thirt party lib for blur background*/
+    require('@jinsung.lim/tailwindcss-filters'),
+  ],
 }

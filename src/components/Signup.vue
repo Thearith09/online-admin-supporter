@@ -90,18 +90,13 @@ export default {
     const { signup, error } = useSignup();
 
     const handleSignup = async () => {
-      const addAdmin = functions.httpsCallable("addAdminRole");
-      const result = await addAdmin({
-        email: "masterit.admin-supporter@gmail.com",
-      });
-      console.log(result);
-      // if (password.value != confirmPassword.value) {
-      //   error.value = "Password doesn't match the confirmation!";
-      // } else {
-      //   await signup(email.value, password.value, username.value);
+      if (password.value != confirmPassword.value) {
+        error.value = "Password doesn't match the confirmation!";
+      } else {
+        await signup(email.value, password.value, username.value);
 
-      //   if (!error.value) console.log("Successful");
-      // }
+        if (!error.value) console.log("Successful");
+      }
     };
 
     return { username, email, password, confirmPassword, error, handleSignup };

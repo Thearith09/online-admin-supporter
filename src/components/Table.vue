@@ -1,7 +1,7 @@
 <template>
-  <div class="overflow-auto pb-5 w-11/12 mx-auto mt-32">
+  <div class="overflow-auto pb-5 w-11/12 mx-auto mt-16">
     <table
-      class="rounded-t-lg table-auto text-gray-100 bg-gradient-to-bl from-blue-400 to-blue-900"
+      class="rounded-t-lg table-auto text-gray-100 bg-gradient-to-bl from-black to-blue-400"
     >
       <tr class="text-left border-b-2 border-blue-300">
         <th class="px-4 py-3">ល.រ</th>
@@ -14,7 +14,7 @@
         <th class="px-4 py-3">វគ្គចុះឈ្មោះ</th>
         <th class="px-4 py-3">ឈ្មោះតេលេក្រាម</th>
         <th class="px-4 py-3">លេខតេលេក្រាម</th>
-        <th class="px-4 py-3">គ្រុបហ្វេសបុ៊ក</th>
+        <th class="px-4 py-3">គ្រុបហ្វេសប៊ុក</th>
         <th class="px-4 py-3">គ្រុបតេលេក្រាម</th>
         <th class="px-4 py-3">កម្មវិធីចង់តំឡើង</th>
         <th class="px-4 py-3">កាលបរិច្ឆេទតំឡើង</th>
